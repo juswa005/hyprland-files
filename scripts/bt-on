@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+DEVICE="18:F3:1A:1F:E6:61"
+
+# Ensure bluetooth service is running
+if ! systemctl is-active bluetooth &>/dev/null; then
+  sudo systemctl start bluetooth
+fi
+
+bluetoothctl <<EOF
+power on
+agent on
+default-agent
+connect $DEVICE
+EOF

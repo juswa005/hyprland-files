@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+DEVICE="18:F3:1A:1F:E6:61"
+
+# Disconnect device
+bluetoothctl <<EOF
+disconnect $DEVICE
+power off
+EOF
+
+echo "Bluetooth turned off and device disconnected ✅"

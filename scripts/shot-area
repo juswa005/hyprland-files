@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+DIR="$HOME/Pictures/Screenshots"
+DATE="$(date +'%Y-%m-%d_%H-%M-%S')"
+FILE="$DIR/screenshot_$DATE.png"
+
+# Make sure the folder exists
+mkdir -p "$DIR"
+
+# Take area screenshot
+grim -g "$(slurp)" "$FILE"
+
+# Copy to clipboard
+wl-copy < "$FILE"
+
