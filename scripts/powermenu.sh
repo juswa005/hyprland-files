@@ -7,11 +7,10 @@ exec 9>"$LOCK" || exit 0
 flock -n 9 || exit 0
 sleep "$DEBOUNCE"
 
-CHOICE=$(printf "Shutdown\nReboot\nCancel" | wofi --dmenu -p "Power" --lines 3)
+CHOICE=$(printf "Shutdown\nReboot\nCancel" | wofi --dmenu --prompt "Power Options" --lines 3 --width 250 --location top)
 
 case "$CHOICE" in
-  Shutdown) systemctl poweroff ;;
-  Reboot) systemctl reboot ;;
-  *) ;;
+Shutdown) systemctl poweroff ;;
+Reboot) systemctl reboot ;;
+*) ;;
 esac
-
