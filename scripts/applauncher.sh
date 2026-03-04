@@ -9,4 +9,3 @@ sleep "$DEBOUNCE"
 wofi --show drun --prompt "Apps"
 
 rm -f "$LOCK"
-
