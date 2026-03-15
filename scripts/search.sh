@@ -19,9 +19,8 @@ ENCODED_QUERY=$(printf '%s' "$QUERY" | sed 's/ /+/g')
 
 # Open in Chromium webapp mode
 chromium --app="https://www.google.com/search?q=$ENCODED_QUERY" \
-         --class=google-webapp \
-         --new-window >/dev/null 2>&1 &
+  --class=google-webapp \
+  --new-window >/dev/null 2>&1 &
 
 # Remove lock
 rm -f "$LOCK"
-

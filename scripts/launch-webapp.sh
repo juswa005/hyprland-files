@@ -9,3 +9,5 @@ if [ -z "$URL" ]; then
 fi
 
 chromium --app="$URL" &
+#brave --app="$URL" &
+#vivaldi --app="$URL" &
