@@ -7,7 +7,7 @@ exec 9>"$LOCK" || exit 0
 flock -n 9 || exit 0
 sleep "$DEBOUNCE"
 
-CHOICE=$(printf "Shutdown\nReboot\nCancel" | wofi --dmenu --prompt "Power Options" --lines 3 --width 250 --location center)
+CHOICE=$(printf "Shutdown\nReboot\nCancel" | wofi --dmenu --prompt "Power Options" --lines 4 --width 200 --location center)
 
 case "$CHOICE" in
 Shutdown) systemctl poweroff ;;
