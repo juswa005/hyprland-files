@@ -1,0 +1,66 @@
+* {
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 12px;
+}
+
+window#waybar {
+    background: rgba(20, 20, 20, 0.9);
+    color: #ffffff;
+}
+
+/* WORKSPACES */
+#workspaces {
+    padding-left: 8px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 4px 3px;
+    border-radius: 6px;
+    background: transparent;
+    color: #888888;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+/* Workspace has windows → underline indicator */
+#workspaces button.occupied {
+    color: #ffffff;
+    border-bottom: 2px solid #81a1c1;
+}
+
+/* Active workspace */
+#workspaces button.active {
+    background: #5e81ac;
+    color: #ffffff;
+    border-bottom: 2px solid transparent;
+}
+
+/* Hover */
+#workspaces button:hover {
+    background: rgba(94, 129, 172, 0.3);
+}
+
+/* MODULE SPACING */
+#clock,
+#pulseaudio,
+#network,
+#battery,
+#tray {
+    padding: 0 10px;
+}
+#custom-bluetooth {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #81a1c1;
+    transition: color 0.2s ease;
+}
+
+#custom-bluetooth:hover {
+    color: #88c0d0;
+}
+
+#custom-screenrecord.recording {
+    color: #ff0000;
+    font-weight: bold;
+}

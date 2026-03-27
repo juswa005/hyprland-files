@@ -1,0 +1,67 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 0,
+
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "custom/bluetooth",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/screenrecord",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5]
+        }
+    },
+
+    "clock": {
+        "format": "{:%a %d %b %Y %H:%M}"
+    },
+
+    "pulseaudio": {
+        "format": " {volume}%",
+        "format-muted": "󰖁"
+    },
+
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤭"
+    },
+
+    "battery": {
+        "format": "{capacity}%",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    },
+
+    "custom/bluetooth": {
+        "exec": "~/.config/waybar/scripts/bluetooth_status.sh",
+        "interval": 5,
+        "return-type": "json"
+    },
+
+    "custom/screenrecord": {
+      "exec": "pgrep -x wf-recorder > /dev/null && echo '{\"text\":\"\",\"class\":\"recording\"}' || echo '{\"text\":\"\"}'",
+      "return-type": "json",
+      "interval": 1
+    }
+}

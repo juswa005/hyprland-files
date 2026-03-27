@@ -1,0 +1,113 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 6,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/powerprofile"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "custom/sysusage",
+    "pulseaudio",
+    "network",
+    "battery",
+    "custom/calendar",
+    "tray"
+  ],
+
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+      "active": "󱓻"
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+
+  "clock": {
+    "format": "{:%a %d %b %Y %H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}"
+  },
+
+  "custom/sysusage": {
+    "exec": "~/.config/waybar/scripts/sysusage.sh",
+    "interval": 5,
+    "format": "{output}",
+    "tooltip": false,
+    "on-click": "gnome-system-monitor || htop"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  Wired",
+    "format-disconnected": "󰤮  Offline",
+    "tooltip-format": "{ifname} via {gwaddr}"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+  },
+
+  "custom/powerprofile": {
+    "exec": "powerprofilesctl get",
+    "interval": 5,
+    "format": "Power Mode: {}",
+    "tooltip": false
+  },
+
+  "custom/calendar": {
+    "exec": "date '+%a %d %b %Y %H:%M'",
+    "interval": 60,
+    "format": "{output}",
+    "tooltip": false,
+    "on-hover": "gnome-calendar"
+  },
+
+  "tray": {
+    "spacing": 8
+  },
+
+  "custom/screenrecord": {
+    "exec": "pgrep -x wf-recorder > /dev/null && echo '{\"text\":\"\",\"class\":\"recording\"}' || echo '{\"text\":\"\"}'",
+    "return-type": "json",
+    "interval": 1
+  }
+}
