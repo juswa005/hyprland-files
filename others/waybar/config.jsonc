@@ -1,0 +1,101 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+
+  "logo": {
+    "type": "builtin",
+    "source": "arch_small",
+    "position": "left",
+    "padding": {
+      "top": 1,
+      "right": 2
+    },
+    "color": {
+      "1": "white",
+      "2": "white"
+    }
+  },
+
+  "display": {
+    "separator": "",
+    "color": {
+      "keys": "white",
+      "title": "white",
+      "output": "white",
+      "separator": "bright_black"
+    },
+    "key": {
+      "width": 14,
+      "type": "string"
+    }
+  },
+
+  "modules": [
+    {
+      "type": "custom",
+      "key": "╭───────────╮",
+      "format": " ",
+      "keyColor": "white"
+    },
+    {
+      "type": "command",
+      "key": "│ user      │",
+      "text": "whoami"
+    },
+    {
+      "type": "command",
+      "key": "│ hname     │",
+      "text": "hostname"
+    },
+    {
+      "type": "os",
+      "key": "│ distro    │",
+      "format": "{name}"
+    },
+    {
+      "type": "kernel",
+      "key": "│ kernel    │",
+      "format": "{release}"
+    },
+    {
+      "type": "uptime",
+      "key": "│ uptime    │",
+      "format": "{formatted}"
+    },
+    {
+      "type": "command",
+      "key": "│ os age    │",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); printf '%s days' \"$(((current - birth_install) / 86400))\""
+    },
+    {
+      "type": "command",
+      "key": "│ shell     │",
+      "text": "printf '%s' \"${SHELL##*/}\""
+    },
+    {
+      "type": "packages",
+      "key": "│ pkgs      │",
+      "format": "{all}"
+    },
+    {
+      "type": "memory",
+      "key": "│ memory    │",
+      "format": "{used} | {total}"
+    },
+    {
+      "type": "colors",
+      "key": "│ colors    │",
+      "symbol": "circle",
+      "paddingLeft": 1,
+      "block": {
+        "width": 1,
+        "range": [0, 7]
+      }
+    },
+    {
+      "type": "custom",
+      "key": "╰───────────╯",
+      "format": " ",
+      "keyColor": "white"
+    }
+  ]
+}
