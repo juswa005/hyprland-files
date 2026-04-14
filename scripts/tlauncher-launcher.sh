@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Options
-choice=$(printf "Normal\nNVIDIA (prime-run)\nNVIDIA (env)\n" | wofi --dmenu --prompt "Launch TLauncher")
+choice=$(printf "Normal\nNVIDIA (prime-run)\nNVIDIA (env)\n" | wofi --dmenu --prompt "Launch TLauncher" --lines 4 --width 250)
 
 case "$choice" in
 "Normal")
