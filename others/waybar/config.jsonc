@@ -1,101 +1,125 @@
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 6,
 
-  "logo": {
-    "type": "builtin",
-    "source": "arch_small",
-    "position": "left",
-    "padding": {
-      "top": 1,
-      "right": 2
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/powerprofile"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "custom/emp",
+    "cpu",
+    "custom/gpu",
+    "memory",
+    "pulseaudio",
+    "network",
+    "battery",
+    "tray"
+  ],
+
+"hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+      "active": "󱓻"
     },
-    "color": {
-      "1": "white",
-      "2": "white"
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
     }
   },
 
-  "display": {
-    "separator": "",
-    "color": {
-      "keys": "white",
-      "title": "white",
-      "output": "white",
-      "separator": "bright_black"
-    },
-    "key": {
-      "width": 14,
-      "type": "string"
-    }
+   "clock": {
+    "format": "{:%a %d %b %Y %H:%M}",
+    "format-alt": "{:%Y-%m-%d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "on-click": "hyprctl dispatch exec \"[float; size 600 300; center] kitty --hold -e sigye\""
+  }, 
+
+  "custom/emp": {
+    "exec": "hostname",
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty --hold -e fastfetch\""
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 5,
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e btop\""
   },
 
-  "modules": [
-    {
-      "type": "custom",
-      "key": "╭───────────╮",
-      "format": " ",
-      "keyColor": "white"
+  "custom/gpu": {
+    "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits | awk -F ', ' '{printf \"󰢮 %s%% %s°C\", $1, $2}'",
+    "interval": 5,
+    "tooltip": false,
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e nvtop\""
+  },
+
+  "memory": {
+    "format": " {percentage}%",
+    "interval": 5,
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e btop\""
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  Wired",
+    "format-disconnected": "󰤮  Offline",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e wifitui\""
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
-    {
-      "type": "command",
-      "key": "│ user      │",
-      "text": "whoami"
+    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e pulsemixer\""
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
-    {
-      "type": "command",
-      "key": "│ hname     │",
-      "text": "hostname"
-    },
-    {
-      "type": "os",
-      "key": "│ distro    │",
-      "format": "{name}"
-    },
-    {
-      "type": "kernel",
-      "key": "│ kernel    │",
-      "format": "{release}"
-    },
-    {
-      "type": "uptime",
-      "key": "│ uptime    │",
-      "format": "{formatted}"
-    },
-    {
-      "type": "command",
-      "key": "│ os age    │",
-      "text": "birth_install=$(stat -c %W /); current=$(date +%s); printf '%s days' \"$(((current - birth_install) / 86400))\""
-    },
-    {
-      "type": "command",
-      "key": "│ shell     │",
-      "text": "printf '%s' \"${SHELL##*/}\""
-    },
-    {
-      "type": "packages",
-      "key": "│ pkgs      │",
-      "format": "{all}"
-    },
-    {
-      "type": "memory",
-      "key": "│ memory    │",
-      "format": "{used} | {total}"
-    },
-    {
-      "type": "colors",
-      "key": "│ colors    │",
-      "symbol": "circle",
-      "paddingLeft": 1,
-      "block": {
-        "width": 1,
-        "range": [0, 7]
-      }
-    },
-    {
-      "type": "custom",
-      "key": "╰───────────╯",
-      "format": " ",
-      "keyColor": "white"
-    }
-  ]
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+  },
+
+  "custom/powerprofile": {
+    "exec": "powerprofilesctl get",
+    "interval": 5,
+    "format": "Power Mode: {}",
+    "tooltip": false
+  },
+
+  "tray": {
+    "spacing": 8
+  },
+
+      "custom/screenrecord": {
+      "exec": "pgrep -x wf-recorder > /dev/null && echo '{\"text\":\"\",\"class\":\"recording\"}' || echo '{\"text\":\"\"}'",
+      "return-type": "json",
+      "interval": 1
+  }
 }
