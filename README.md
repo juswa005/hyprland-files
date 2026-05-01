@@ -1,101 +1,23 @@
-# Hyprland Files
+# Hyprland Config
 
-This repository contains a modular Hyprland setup plus companion configs for Waybar, Kitty, and Dunst.
+This repository is the live `~/.config/hypr` directory for a modular Hyprland setup. The config is split into small files, most key behavior is driven by shell helpers in `scripts/`, and a few app configs are mirrored under `others/` for backup/reference.
 
-The main Hyprland config is intentionally split into small files so it is easier to copy, maintain, and tweak per machine. The current setup is built around a personal dual-monitor workflow with Wofi launchers, Chromium web-app shortcuts, quick note capture, screenshots, screen recording, media controls, and a simple lock/idle stack.
+It is usable as a starting point, but it is not a drop-in "works everywhere" preset. Several bindings and autostart entries are personal and should be reviewed before first launch.
 
-## Overview
+## What You Are Getting
 
-- Window manager: Hyprland with the `dwindle` layout
-- Style: minimal gaps, thin borders, animations disabled
-- Lock/idle stack: `hyprlock` + `hypridle`
-- Screen warmth: `hyprsunset`
-- Launcher/UI helpers: `wofi`, `waybar`, `dunst`
-- Clipboard flow: `wl-paste` + `cliphist`
-- Capture tools: `hyprshot`, `grim`, `slurp`, `wf-recorder`
-- Browser workflow: Chromium app windows plus a small anime/movie selector
-- Extra configs: bundled Dunst, Kitty, and Waybar files in `others/`
-- Extra assets: wallpapers and terminal/logo art in `ff_logo/`
+- Dwindle layout with small gaps, thin borders, and animations disabled
+- Separate config files for bindings, inputs, autostart, window rules, lock screen, idle lock, and night light
+- Wofi-based launchers for apps, clipboard history, emoji, search, power menu, and cheatsheets
+- Region OCR, screenshots, and GPU-based screen recording helpers
+- Optional mirrored configs for Waybar, Kitty, and Dunst under `others/`
+- Wallpaper and terminal art assets bundled in `wallpapers/` and `ff_logo/`
 
-## Repository Layout
+## Live vs Non-Live Files
 
-### Top-level Hyprland config
-
-| File | Purpose |
-| --- | --- |
-| `hyprland.conf` | Main entry point. Sources the modular config files and sets the core layout defaults. |
-| `binds.conf` | Main keybindings for apps, web shortcuts, screenshots, recording, music, quick notes, and helper scripts. |
-| `binds-qol.conf` | Extra keybindings for focus movement, swapping tiled windows, workspace cycling, extra screenshots, media keys, and layout toggles. |
-| `autostart.conf` | Starts tray applets, Waybar, wallpaper, notifications, clipboard watchers, `hyprsunset`, `hypridle`, Ollama, and a PicoClaw terminal. |
-| `inputs.conf` | Keyboard layout, pointer sensitivity, and touchpad behavior. |
-| `windows.conf` | Declares workspaces `1` through `10`. |
-| `windowrules.conf` | Floats and centers `wofi` with a fixed size. |
-| `monitors.conf` | `nwg-displays` generated monitor layout for `eDP-1` and `HDMI-A-1`. |
-| `workspaces.conf` | `nwg-displays` generated workspace-to-monitor assignments. |
-| `hypridle.conf` | Locks the session with `hyprlock` after 300 seconds of inactivity. |
-| `hyprlock.conf` | Lock screen background, password box, clock, date, username, and failure label styling. |
-| `hyprsunset.conf` | Blue-light reduction config with manual sunrise/sunset times and a 4000K night temperature. |
-
-### `scripts/`
-
-| File | Purpose |
-| --- | --- |
-| `scripts/anime-movies.sh` | Opens a Wofi menu that launches either Aniwatch or a movie site in Chromium app mode. |
-| `scripts/applauncher.sh` | Opens a Wofi `drun` launcher with a simple lockfile debounce. |
-| `scripts/hypr-binds.sh` | Displays `bind` lines from `binds.conf` inside Wofi. |
-| `scripts/hypridle-toggle.sh` | Enables or disables `hypridle` and sends a notification about the current state. |
-| `scripts/launch-webapp.sh` | Launches a URL in Chromium app mode. |
-| `scripts/notify-spotify.sh` | Sends a desktop notification with the current Spotify track if Spotify is playing. |
-| `scripts/powermenu.sh` | Opens a Wofi shutdown/reboot menu. |
-| `scripts/powermode.sh` | Switches between `performance`, `balanced`, and `power-saver` profiles. |
-| `scripts/preview-clipboard.sh` | Decodes clipboard history items and renders image previews through ImageMagick when needed. |
-| `scripts/quick-note.sh` | Opens a floating Kitty + Neovim window on a timestamped note in `~/Notes`. |
-| `scripts/screenrecord.sh` | Starts or stops region recording with `wf-recorder`, with or without audio, and notifies the result. |
-| `scripts/search.sh` | Opens a one-line Wofi prompt and launches a Google search in Chromium app mode. |
-| `scripts/shot-area` | Saves a region screenshot to `~/Pictures/Screenshots` and copies it to the clipboard. |
-| `scripts/tlauncher-launcher.sh` | Launches TLauncher normally or through NVIDIA offload modes. |
-| `scripts/waybar-toggle.sh` | Toggles Waybar on and off by PID. |
-| `scripts/yt-dlp` | Bundled `yt-dlp` executable. Not wired into the current Hyprland config. |
-| `scripts/bin` | Empty placeholder file in the current snapshot. |
-
-### `others/`
-
-These files are not sourced by Hyprland automatically. They are companion configs you can copy into their normal locations under `~/.config`.
-
-| Path | Purpose |
-| --- | --- |
-| `others/dunst/dunstrc` | Minimal monochrome Dunst config with top-right placement and rounded corners. |
-| `others/kitty/kitty.conf` | Main Kitty config using `FiraCode Nerd Font`, light transparency, and a black-and-white palette. |
-| `others/kitty/*.conf` | Extra Kitty color/theme files, including `Kanagawa.conf` and a backup `kitty.conf.bak`. |
-| `others/waybar/2.jsonc` | Current Waybar config with workspaces, power profile, sysusage, audio, network, battery, calendar, and tray modules. |
-| `others/waybar/style.css` | Waybar stylesheet for the current bar layout. |
-| `others/waybar/scripts/sysusage.sh` | Small helper script that prints CPU and RAM usage for Waybar. |
-| `others/waybar/backups/` | Older Waybar config and style backups. |
-| `others/waybar/config.jsonc` | Fastfetch-style preset stored in this folder. It is not the active Waybar config. |
-
-### Assets
-
-| Path | Contents |
-| --- | --- |
-| `wallpapers/` | 13 wallpapers in JPG, JPEG, and PNG formats. The current default wallpaper is `wallpapers/jap2.jpg`. |
-| `ff_logo/` | 5 PNG art assets plus `frieren.txt`, an ANSI-colored text-art file for terminal or Fastfetch use. |
-
-## Current Behavior
-
-### Hyprland core
-
-`hyprland.conf` keeps the desktop style compact and minimal:
-
-- `gaps_in = 1`
-- `gaps_out = 2`
-- `border_size = 1`
-- `layout = dwindle`
-- animations are fully disabled
-
-It currently sources:
+The main entrypoint is `hyprland.conf`. It currently sources:
 
 - `binds.conf`
-- `binds-qol.conf`
 - `inputs.conf`
 - `windows.conf`
 - `autostart.conf`
@@ -103,45 +25,50 @@ It currently sources:
 - `hyprsunset.conf`
 - `monitors.conf`
 - `workspaces.conf`
+- `~/.config/hypremoji/hypremoji.conf`
 
-### Monitors and workspaces
+Important notes:
 
-The current monitor layout assumes:
+- `hyprlock.conf` and `hypridle.conf` are live, but they are launched by bindings/autostart rather than sourced from `hyprland.conf`.
+- `monitors.conf` and `workspaces.conf` are generated by `nwg-displays`. Regenerate them for your hardware instead of editing them by hand.
+- `others/waybar`, `others/kitty`, and `others/dunst` are not wired automatically by Hyprland. `waybar` is started as plain `waybar`, and the sync script mirrors your real `~/.config/{waybar,kitty,dunst}` back into this repo.
+- `hyprland-backup-20260415-014031.conf` is a historical backup, not the active entrypoint.
+- The backup still references `binds-qol.conf`, but the current live `hyprland.conf` does not.
 
-- `eDP-1` at `1920x1080@60`, scale `1.25`
-- `HDMI-A-1` at `1920x1080@144`, scale `1.0`
+## Repository Layout
 
-Workspaces are pinned by monitor:
+```text
+.
+├── hyprland.conf                # Main Hyprland entrypoint
+├── binds.conf                   # Keybindings and helper script paths
+├── inputs.conf                  # Keyboard, mouse, touchpad settings
+├── windows.conf                 # Workspace declarations
+├── windowrules.conf             # Float/size rules for selected apps
+├── autostart.conf               # Session startup commands
+├── hyprsunset.conf              # Night light schedule
+├── hyprlock.conf                # Lock screen appearance
+├── hypridle.conf                # Idle timeout -> lock
+├── monitors.conf                # Generated by nwg-displays
+├── workspaces.conf              # Generated by nwg-displays
+├── scripts/                     # Launchers, toggles, capture, sync helpers
+├── others/                      # Mirrored Waybar / Kitty / Dunst configs
+├── wallpapers/                  # Wallpaper assets
+└── ff_logo/                     # Optional terminal art assets
+```
 
-- `1` to `8` live on `HDMI-A-1`
-- `9` and `10` live on `eDP-1`
-- default workspaces are `1` on the external display and `10` on the laptop display
+## Current Behavior
 
-Both `monitors.conf` and `workspaces.conf` are generated by `nwg-displays`, so they should usually be regenerated there instead of hand-edited.
+### `hyprland.conf`
 
-### Input behavior
+- Uses the `dwindle` layout
+- Sets `gaps_in = 1`, `gaps_out = 2`, `border_size = 1`
+- Disables animations
+- Enables `xwayland { force_zero_scaling = true }`
+- Sources a separate Hypremoji config from `~/.config/hypremoji/hypremoji.conf`
 
-`inputs.conf` currently sets:
+### `autostart.conf`
 
-- US keyboard layout
-- `follow_mouse = 1`
-- neutral sensitivity
-- touchpad natural scrolling
-- touchpad tap-to-click
-- touchpad disable-while-typing
-
-There is also a commented `altwin:swap_alt_win` line kept for an external keyboard workflow.
-
-### Idle, lock, and screen warmth
-
-- `hypridle` locks the session after 5 minutes
-- `hyprlock` uses `wallpapers/jap2.jpg` with blur and a centered password box
-- the lock screen shows time, full date, current user, and fail-state text
-- `hyprsunset` is enabled with a 4000K night temperature, 10 second transitions, and manual `06:00` / `18:00` switching
-
-### Autostart programs
-
-On session start, the current setup tries to launch:
+The session currently starts:
 
 - `nm-applet`
 - `blueman-applet`
@@ -150,239 +77,346 @@ On session start, the current setup tries to launch:
 - `swaybg` with `wallpapers/jap2.jpg`
 - `dunst`
 - `hyprsunset`
-- text and image clipboard watchers via `wl-paste` + `cliphist`
-- `ollama` through `systemctl --user start ollama || ollama serve`
+- `wl-paste` watchers for `cliphist` text and image history
+- `ollama` via `systemctl --user start ollama || ollama serve`
 - `hypridle`
+- `scripts/sync-others.sh watch`
 - `foot -e sh -c 'picoclaw agent 2>/dev/null'`
 
-That means this setup assumes a few custom or optional tools already exist on the machine, especially `elephant`, `ollama`, and `picoclaw`.
+If any of those commands do not exist on your machine, remove or replace the line before using the config.
 
-## Keybindings
+### `inputs.conf`
 
-`SUPER` is the main modifier.
+- Keyboard layout is `us`
+- `follow_mouse = 1`
+- Touchpad natural scroll and tap-to-click are enabled
+- A `kb_options = altwin:swap_alt_win` line is intentionally present for an external keyboard workflow
+- `scripts/keyboard-mode-toggle.sh` comments/uncomments that line and then reloads Hyprland
 
-### App launchers and desktop tools
+### `windows.conf`
 
-| Key | Action |
-| --- | --- |
-| `SUPER + Return` | Open `kitty` |
-| `SUPER + Shift + Return` | Open a Kitty terminal that runs `fastfetch` |
-| `SUPER + Space` | Open the Wofi app launcher |
-| `SUPER + B` | Open Chromium |
-| `SUPER + E` | Open Nautilus |
-| `SUPER + L` | Open LocalSend |
-| `SUPER + Shift + A` | Open Spotify via `spotify-launcher` |
-| `SUPER + Shift + M` | Open the TLauncher mode selector |
-| `SUPER + grave` | Open VS Code |
-| `Ctrl + Shift + Escape` | Open `btop` in Kitty |
-| `SUPER + Alt + Space` | Open the Google search prompt |
-| `SUPER + Ctrl + N` | Open a floating quick note |
+- Declares workspaces `1` through `10`
 
-### Web shortcuts
+### `windowrules.conf`
 
-| Key | Action |
-| --- | --- |
-| `SUPER + I` | Instagram |
-| `SUPER + C` | Google Calendar |
-| `SUPER + Shift + F` | Facebook |
-| `SUPER + A` | ChatGPT |
-| `SUPER + G` | Gmail |
-| `SUPER + Y` | YouTube |
-| `SUPER + M` | Facebook Messenger |
-| `SUPER + N` | Open the anime/movie launcher menu |
-| `SUPER + Shift + G` | Personal GitHub profile |
-| `SUPER + Shift + K` | Kimi |
-| `SUPER + D` | Discord in Firefox |
-| `SUPER + Shift + O` | BitSync-Devs GitHub |
-| `SUPER + Shift + W` | Router/admin page at `http://192.168.254.254` |
-| `SUPER + Shift + T` | Telegram Web |
+Rules currently float and size:
 
-### Window manager and system controls
+- `wofi`
+- `org.gnome.Calculator`
+- `io.github.kaii_lb.Overskride`
 
-| Key | Action |
-| --- | --- |
-| `SUPER + W` | Kill the active window |
-| `SUPER + F` | Toggle fullscreen |
-| `SUPER + T` | Toggle floating |
-| `SUPER + Escape` | Open the power menu |
-| `SUPER + Shift + Escape` | Open the power-profile menu |
-| `SUPER + Shift + L` | Lock with `hyprlock` |
-| `SUPER + Ctrl + L` | Disable `hypridle` |
-| `SUPER + Alt + L` | Enable `hypridle` |
-| `SUPER + Z` | Toggle Waybar |
-| `SUPER + Ctrl + V` | Pick a clipboard item from `cliphist` through Wofi |
-| `SUPER + K` | Show the keybindings viewer |
-| `SUPER + Shift + N` | Notify the currently playing Spotify track |
-| `SUPER + Shift + Ctrl + Q` | Exit Hyprland |
+### `hypridle.conf`
 
-### Workspaces and navigation
+- Locks the session with `hyprlock` after 300 seconds
 
-| Key | Action |
-| --- | --- |
-| `SUPER + 1..0` | Switch to workspace `1..10` |
-| `SUPER + Shift + 1..0` | Move the active window to workspace `1..10` |
-| `SUPER + Ctrl + Left/Right/Up/Down` | Move focus between tiled windows |
-| `SUPER + Ctrl + Shift + Left/Right/Up/Down` | Swap tiled windows |
-| `SUPER + mouse wheel` | Cycle workspaces |
-| `SUPER + Tab` | Move to the next workspace |
-| `Alt + Tab` | Cycle focus backward |
+### `hyprlock.conf`
 
-### Floating window and layout controls
+- Uses `wallpapers/jap2.jpg`
+- Applies blur and a centered password field
+- Shows time, date, username, and failure status
+- Assumes `JetBrainsMono Nerd Font` is installed
 
-| Key | Action |
-| --- | --- |
-| `SUPER + Shift + Arrow` | Move the active floating window |
-| `SUPER + Alt + Arrow` | Resize the active floating window |
-| `SUPER + Alt + T` | Toggle pseudo tiling |
-| `SUPER + Shift + P` | Pin the active window |
-| `SUPER + left mouse button` | Move window |
-| `SUPER + right mouse button` | Resize window |
+### `hyprsunset.conf`
 
-### Brightness, audio, and media
+- Enabled
+- Manual schedule with `sunrise = 06:00` and `sunset = 18:00`
+- Night temperature set to `4000`
 
-| Key | Action |
-| --- | --- |
-| `XF86MonBrightnessUp` | Increase brightness by 10% |
-| `XF86MonBrightnessDown` | Set brightness to 10% |
-| `SUPER + Shift + U` | Increase brightness by 10% |
-| `SUPER + Shift + D` | Decrease brightness by 10% |
-| `XF86AudioRaiseVolume` | Raise volume by 5% |
-| `XF86AudioLowerVolume` | Lower volume by 5% |
-| `XF86AudioMute` | Toggle output mute |
-| `XF86AudioMicMute` | Toggle microphone mute |
-| `XF86AudioPlay` | Play/pause media |
-| `XF86AudioNext` | Next track |
-| `XF86AudioPrev` | Previous track |
-| `SUPER + Up` | Raise volume by 5% |
-| `SUPER + Down` | Lower volume by 5% |
-| `SUPER + Right` | Toggle output mute |
+### `monitors.conf` and `workspaces.conf`
 
-### Screenshots and recording
-
-| Key | Action |
-| --- | --- |
-| `SUPER + Shift + S` | Region screenshot through `hyprshot` |
-| `Print` | Screenshot the current output |
-| `Shift + Print` | Screenshot the active window |
-| `SUPER + Alt + S` | Start region recording with audio |
-| `SUPER + Ctrl + S` | Start region recording without audio |
-| `SUPER + Shift + C` | Stop recording |
+- These are generated files, not hand-maintained config
+- The current repo snapshot expects monitors named `eDP-1` and `HDMI-A-1`
+- The current workspace mapping is machine-specific and should be regenerated for your own setup
 
 ## Dependencies
 
-This setup relies on more than Hyprland itself.
+This setup assumes a Wayland/Hyprland desktop with a fairly opinionated toolchain. Install the packages that provide these commands before first use.
 
-### Core Wayland and desktop stack
+### Core session
 
 - `hyprland`
 - `hyprlock`
 - `hypridle`
 - `hyprsunset`
+- `kitty`
+- `foot`
 - `waybar`
 - `wofi`
 - `dunst`
 - `swaybg`
-- `wl-clipboard`
-- `cliphist`
-
-### Capture and media helpers
-
-- `hyprshot`
-- `grim`
-- `slurp`
-- `wf-recorder`
-- `playerctl`
-- `imagemagick`
-- PipeWire with `wpctl`
-
-### Desktop utilities
-
-- `kitty`
-- `foot`
-- `nautilus`
 - `chromium`
 - `firefox`
-- `brightnessctl`
-- `powerprofilesctl` / `power-profiles-daemon`
-- `fastfetch`
-- `btop`
-- `libnotify`
+- `nautilus`
 - `nm-applet`
 - `blueman-applet`
-- `localsend`
+- `wl-copy`
+- `wl-paste`
+- `cliphist`
+- `wpctl`
+- `brightnessctl`
+- `playerctl`
+- `powerprofilesctl`
 
-### Companion config extras
+### Script helpers
+
+- `grim`
+- `slurp`
+- `hyprshot`
+- `gpu-screen-recorder`
+- `tesseract`
+- `magick`
+- `rsync`
+- `inotifywait`
+- `flock`
+- `lockfile`
+- `wtype`
+
+### Optional apps referenced by bindings or startup
+
+- `hypremoji` and a valid `~/.config/hypremoji/hypremoji.conf`
+- `spotify`
+- `localsend`
+- `code`
+- `btop`
+- `fastfetch`
+- `nvtop`
+- `pulsemixer`
+- `wifitui`
+- `ollama`
+- `picoclaw`
+- `elephant`
+- `/snap/bin/visualboyadvance-m`
+- `java` for TLauncher
+
+### Fonts
+
+Install at least these fonts if you want the setup to look right:
 
 - `JetBrainsMono Nerd Font`
 - `FiraCode Nerd Font`
-- `pavucontrol` if you want the included Waybar audio click action
-- `gnome-system-monitor` or `htop` if you want the included Waybar sysusage click action
-- `gnome-calendar` if you want the included Waybar calendar hover action
-
-### Optional or user-specific tools
-
-- `spotify-launcher`
-- `code`
-- `ollama`
-- `picoclaw`
-- `elephant`
-- `java`
-- `prime-run` or NVIDIA PRIME offload support
-- `nwg-displays`
-- a `lockfile` utility for `scripts/applauncher.sh`
+- `Symbols Nerd Font`
 
 ## Installation
 
-The Hyprland config expects to live at `~/.config/hypr`.
+### 1. Back up your current Hyprland config
 
 ```bash
-git clone https://github.com/juswa005/hyprland-files.git ~/.config/hypr
-chmod +x ~/.config/hypr/scripts/*
+mv ~/.config/hypr ~/.config/hypr.backup.$(date +%F-%H%M%S)
 ```
 
-If you also want the bundled companion configs, copy them into their usual config locations:
+### 2. Clone this repo into place
 
 ```bash
-mkdir -p ~/.config/waybar ~/.config/kitty ~/.config/dunst
-cp ~/.config/hypr/others/waybar/2.jsonc ~/.config/waybar/config.jsonc
-cp ~/.config/hypr/others/waybar/style.css ~/.config/waybar/style.css
-cp -r ~/.config/hypr/others/waybar/scripts ~/.config/waybar/
-cp ~/.config/hypr/others/dunst/dunstrc ~/.config/dunst/dunstrc
-cp -r ~/.config/hypr/others/kitty/* ~/.config/kitty/
+git clone https://github.com/juswa005/dotfiles.git ~/.config/hypr
 ```
 
-Before logging in, review the user-specific paths and commands:
+If you prefer to keep the repo elsewhere, clone it anywhere you like and symlink it back to `~/.config/hypr`.
 
-- replace `/home/amiel/.config/hypr/...` in `binds.conf` and `autostart.conf`
-- review `~/Games/tl.jar` in `scripts/tlauncher-launcher.sh`
-- review `~/Notes` in `scripts/quick-note.sh`
-- review `~/Videos/Recordings` in `scripts/screenrecord.sh`
-- review `~/Pictures/Screenshots` in the screenshot binds and `scripts/shot-area`
+### 3. Install the required commands
 
-If you do not use some personal tools, comment them out or remove their binds:
+Do not skip this step. Several bindings and autostart entries assume the commands listed above already exist.
 
-- `elephant`
-- `ollama`
-- `picoclaw`
-- TLauncher / Java / NVIDIA launch modes
-- Spotify or LocalSend keybinds if those apps are absent
+### 4. Review the machine-specific and personal values
 
-## Notes and Caveats
+Before launching the config, check these files and change anything that is personal to the original machine:
 
-- `binds.conf` defines `$clipboard = /home/amiel/.config/hypr/scripts/clipboard.sh`, but there is no matching `scripts/clipboard.sh` in this repository and that variable is not used by any bind.
-- `scripts/preview-clipboard.sh` exists, but the current clipboard bind uses `cliphist` inline instead of that script.
-- `scripts/shot-area` exists, but screenshots are currently handled by `hyprshot` binds instead.
-- `scripts/yt-dlp` is bundled in the repo but not called from the Hyprland config.
-- `scripts/bin` is currently an empty file.
-- the comment above `SUPER + Ctrl + N` still says `wallpaper selector`, but the bind actually launches the quick-note script.
-- `autostart.conf` is UTF-8 with BOM, while most other files are plain text without it.
-- `others/waybar/config.jsonc` is not the current Waybar config even though the filename suggests it is. The active bar config in this repo is `others/waybar/2.jsonc`.
+- `autostart.conf`
+  - remove or replace `elephant`
+  - remove or replace the `picoclaw` startup line
+  - change the wallpaper path if you do not want `wallpapers/jap2.jpg`
+  - remove `ollama` startup if unused
+- `hyprland.conf`
+  - comment out `source = ~/.config/hypremoji/hypremoji.conf` if you do not use Hypremoji
+- `binds.conf`
+  - review all personal URLs opened by the webapp shortcuts
+  - replace `chromium` profile names if yours differ
+  - replace the LAN IP shortcuts if they are meaningless on your network
+  - remove `localsend`, `spotify`, `code`, or emulator bindings if you do not use them
+  - update the TLauncher path if `~/Games/tl.jar` does not exist
+- `monitors.conf` and `workspaces.conf`
+  - regenerate them with `nwg-displays` for your monitor layout
 
-## Suggested First Edits
+### 5. If you want the bundled Waybar / Kitty / Dunst configs to be live, install them explicitly
 
-1. Fix all `/home/amiel/...` paths.
-2. Update `monitors.conf` and `workspaces.conf` for your displays.
-3. Copy the `others/` configs you actually want to use.
-4. Remove or comment out apps you do not have installed.
-5. Pick your wallpaper and update both `autostart.conf` and `hyprlock.conf`.
-6. Test launcher, clipboard, screenshot, recording, Waybar, and lockscreen flows one by one.
+This repo does not automatically point those programs at `others/`.
+
+Typical options:
+
+- copy the contents of `others/waybar` to `~/.config/waybar`
+- copy the contents of `others/kitty` to `~/.config/kitty`
+- copy the contents of `others/dunst` to `~/.config/dunst`
+- or symlink those directories if that matches your dotfiles workflow
+
+### 6. Reload Hyprland
+
+```bash
+hyprctl reload
+```
+
+## Keybindings
+
+This repo has a lot of bindings. The full source of truth is `binds.conf`. These are the main ones.
+
+### Apps and launchers
+
+- `SUPER + Return` -> Kitty
+- `SUPER + Shift + Return` -> Kitty running `fastfetch`
+- `SUPER + Space` -> app launcher
+- `SUPER + E` -> Nautilus
+- `SUPER + Shift + E` -> Hypremoji
+- `SUPER + B` -> Chromium default profile
+- `SUPER + Shift + B` -> Chromium "Profile 2"
+- `SUPER + Shift + M` -> TLauncher menu
+- `SUPER + L` -> LocalSend
+- `SUPER + Shift + A` -> Spotify
+- `SUPER + ~` -> VS Code
+
+### Personal web shortcuts
+
+Several `SUPER + <key>` bindings launch hardcoded web apps or URLs in Chromium or Firefox, including:
+
+- ChatGPT
+- Gmail
+- YouTube
+- Instagram
+- Facebook / Messenger
+- Google Calendar
+- Discord
+- GitHub profiles
+- a local router page
+- a LAN dashboard
+
+Review and replace these in `binds.conf` before using the config on another machine.
+
+### System controls
+
+- `SUPER + Escape` -> power menu
+- `SUPER + Shift + Escape` -> power profile selector
+- `SUPER + Shift + L` -> lock screen
+- `SUPER + Ctrl + L` -> disable `hypridle`
+- `SUPER + Alt + L` -> enable `hypridle`
+- `SUPER + Z` -> toggle Waybar
+- `SUPER + Ctrl + V` -> clipboard history picker
+- `SUPER + Ctrl + K` -> toggle the keyboard mode line in `inputs.conf`
+- `SUPER + K` -> keybind viewer
+- `SUPER + H` -> tmux cheatsheet
+- `SUPER + Shift + H` -> Neovim cheatsheet
+- `SUPER + Shift + N` -> show current Spotify track
+- `SUPER + Ctrl + N` -> open a floating quick note in `~/Notes`
+
+### Screenshots, OCR, and recording
+
+- `SUPER + Shift + S` -> region screenshot via `hyprshot`
+- `Print` -> full output screenshot
+- `Shift + Print` -> active window screenshot
+- `SUPER + Alt + S` -> start region recording with desktop audio
+- `SUPER + Ctrl + S` -> start region recording without audio
+- `SUPER + Shift + C` -> stop recording
+- `SUPER + Shift + T` -> OCR a selected region and copy the detected text
+
+### Workspaces and windows
+
+- `SUPER + 1..0` -> switch workspace `1..10`
+- `SUPER + Shift + 1..0` -> move active window to workspace `1..10`
+- `SUPER + T` -> toggle floating
+- `SUPER + Ctrl + Arrow` -> move focus
+- `SUPER + Ctrl + Shift + Arrow` -> swap tiled windows
+- `SUPER + Shift + Arrow` -> move floating windows
+- `SUPER + Alt + Arrow` -> resize floating windows
+- `ALT + Tab` -> cycle focus
+
+### Hardware and media keys
+
+- `XF86MonBrightnessUp` / `XF86MonBrightnessDown`
+- `XF86AudioRaiseVolume` / `XF86AudioLowerVolume` / `XF86AudioMute`
+- `XF86AudioMicMute`
+- `XF86AudioPlay` / `XF86AudioNext` / `XF86AudioPrev`
+
+## Helper Scripts
+
+All custom helpers live in `scripts/`.
+
+| Script | Purpose | Notes |
+| --- | --- | --- |
+| `applauncher.sh` | Opens Wofi app launcher | Uses `lockfile` for debouncing |
+| `anime-movies.sh` | Menu for opening anime/movie sites | Hardcoded URLs |
+| `clipboard.sh` | Clipboard history picker | Requires `cliphist`, `wofi`, `wl-copy` |
+| `emoji-picker.sh` | Emoji picker and optional typed insertion | Uses `wtype` if available |
+| `hypr-binds.sh` | Shows bindings from `binds.conf` in Wofi | Good quick reference |
+| `hypridle-toggle.sh` | Starts or stops `hypridle` | Sends desktop notifications |
+| `keyboard-mode-toggle.sh` | Comments/uncomments `kb_options = altwin:swap_alt_win` | Runs `hyprctl reload` |
+| `launch-webapp.sh` | Opens a URL in Chromium app mode | Used by multiple keybinds |
+| `notify-spotify.sh` | Shows current Spotify track | Silent when Spotify is not playing |
+| `nvim-cheatsheet.sh` | Neovim cheatsheet picker | Read-only helper |
+| `ocr-area.sh` | OCR for a selected screen region | Requires `grim`, `slurp`, `tesseract`, `wl-copy` |
+| `powermenu.sh` | Shutdown / reboot menu | Uses `systemctl` |
+| `powermode.sh` | Power profile menu | Requires `powerprofilesctl` |
+| `preview-clipboard.sh` | Decodes clipboard entries for preview | Uses `magick` for image thumbnails |
+| `quick-note.sh` | Opens a dated note in a floating Kitty + Neovim window | Writes to `$HOME/Notes` |
+| `screenrecord.sh` | Region recorder with optional desktop audio | Uses `gpu-screen-recorder` |
+| `search.sh` | Google search prompt in app mode Chromium | Hardcoded to Google |
+| `shot-area` | Region screenshot helper | Separate from the `hyprshot` bindings |
+| `sync-others.sh` | Mirrors `~/.config/{waybar,kitty,dunst}` into `others/` | Starts in watch mode at login |
+| `tlauncher-launcher.sh` | TLauncher mode picker | Assumes `~/Games/tl.jar` |
+| `tmux-cheatsheet.sh` | tmux cheatsheet picker | Read-only helper |
+| `waybar-toggle.sh` | Starts or kills Waybar | Launches bare `waybar` |
+
+## Mirrored App Configs in `others/`
+
+These are useful, but they are not automatically active just because they exist in this repo.
+
+### `others/waybar`
+
+- `config.jsonc` is the main mirrored Waybar config
+- `style.css` is the main mirrored stylesheet
+- `2.jsonc` is an alternate Waybar layout
+- `backups/` contains older Waybar config/style snapshots
+- `scripts/sysusage.sh` is a simple CPU/RAM script used by the alternate layout
+
+The main mirrored Waybar setup expects click handlers for tools such as `fastfetch`, `nvtop`, `btop`, `pulsemixer`, `wifitui`, and `sigye`.
+
+### `others/kitty`
+
+- `kitty.conf` is a black-and-white leaning main config with transparency
+- `colors.conf` contains a Tokyo Night palette
+- `Kanagawa.conf` is a full alternate theme
+- `kitty.conf.bak` is an older minimalist Kitty config
+- `current-theme.conf` and `Default.conf` are stock/default theme references
+
+### `others/dunst`
+
+- `dunstrc` defines a monochrome notification look using JetBrainsMono
+
+## Assets
+
+- `wallpapers/jap2.jpg` is used by both `autostart.conf` and `hyprlock.conf`
+- `wallpapers/` contains additional wallpapers you can swap in manually
+- `ff_logo/` contains PNG art plus `frieren.txt`, which looks like ANSI/terminal art for tools such as Fastfetch
+
+## Known Caveats
+
+- The config is personalized. Some bindings open personal sites, LAN addresses, or apps that may not exist on your machine.
+- `sync-others.sh watch` continuously mirrors your real `~/.config/waybar`, `~/.config/kitty`, and `~/.config/dunst` into this repo. If you do not want that behavior, remove the autostart line.
+- `waybar` is launched without a `-c` or `-s` path, so Waybar will use whatever config is installed in your real `~/.config/waybar`, not the repo copy under `others/waybar`.
+- The mirrored Waybar configs still use a `wf-recorder` check for the recording indicator, but the live recording helper uses `gpu-screen-recorder`.
+- `hyprland.conf` sources `~/.config/hypremoji/hypremoji.conf`. If that file is missing, comment out the line.
+- `quick-note.sh` creates files in `$HOME/Notes`.
+- `monitors.conf` and `workspaces.conf` are machine-specific generated files.
+
+## Adapting It For Your Own Machine
+
+If you want to reuse this setup cleanly:
+
+1. Get the core session stable first: `hyprland.conf`, `binds.conf`, `inputs.conf`, `autostart.conf`.
+2. Remove personal app bindings and hardcoded URLs next.
+3. Regenerate monitors/workspaces with `nwg-displays`.
+4. Decide whether you want the mirrored `others/` configs to become your real Waybar/Kitty/Dunst configs.
+5. Only keep startup services you actually use.
+
+## Verification
+
+There is no build, lint, or test runner in this repo. Verification is manual:
+
+- run `hyprctl reload` after editing config files
+- use `bash -n scripts/<name>.sh` when changing shell helpers
+- exercise the relevant keybinding in a live Hyprland session

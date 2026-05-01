@@ -1,43 +1,61 @@
 #!/usr/bin/env bash
 
-PIDFILE="/tmp/wf-recorder.pid"
-OUTPUT="$HOME/Videos/Recordings/Screen_Rec_$(date +%Y-%m-%d_%H-%M-%S).mp4"
+PIDFILE="/tmp/gpu-screen-recorder.pid"
+OUTFILE="/tmp/gpu-screen-recorder.out"
+RECORDINGS_DIR="$HOME/Videos/Recordings"
 
 start_recording() {
-  MODE="$1"
+  local mode="$1"
+  local geom output pid audio_status
+  local -a cmd
 
-  # Prevent duplicates
-  if pgrep -x wf-recorder >/dev/null; then
+  if pgrep -f "^gpu-screen-recorder( |$)" >/dev/null; then
     notify-send "Screen Recorder" "Already recording."
     exit 0
   fi
 
-  # Area selection
-  GEOM=$(slurp)
-  [ -z "$GEOM" ] && exit 0
+  geom=$(slurp -f "%wx%h+%x+%y")
+  [ -z "$geom" ] && exit 0
 
-  CMD="wf-recorder -g \"$GEOM\" -f \"$OUTPUT\" -r 60 --muxer=mp4 -c libx264 -x yuv420p"
+  output="$RECORDINGS_DIR/Screen_Rec_$(date +%Y-%m-%d_%H-%M-%S).mp4"
+  cmd=(gpu-screen-recorder -w region -region "$geom" -f 60 -k h264 -c mp4 -o "$output")
 
-  if [ "$MODE" = "audio" ]; then
-    CMD="$CMD -a" # captures microphone
-    AUDIO_STATUS="Audio: ON (mic)"
+  if [ "$mode" = "audio" ]; then
+    cmd+=( -a default_output -ac aac )
+    audio_status="Audio: ON (desktop)"
   else
-    AUDIO_STATUS="Audio: OFF"
+    audio_status="Audio: OFF"
   fi
 
-  eval "$CMD" &
-  echo $! >"$PIDFILE"
+  "${cmd[@]}" &
+  pid=$!
 
-  notify-send "Recording Started 🎥" "$AUDIO_STATUS"
+  printf '%s\n' "$pid" >"$PIDFILE"
+  printf '%s\n' "$output" >"$OUTFILE"
+
+  notify-send "Recording Started 🎥" "$audio_status"
 }
 
 stop_recording() {
+  local pid output
+
+  output=""
+  [ -f "$OUTFILE" ] && output=$(<"$OUTFILE")
+
   if [ -f "$PIDFILE" ]; then
-    kill "$(cat "$PIDFILE")" 2>/dev/null
-    rm -f "$PIDFILE"
-    notify-send "Recording Stopped 🛑" "Saved to:\n$OUTPUT"
+    pid=$(<"$PIDFILE")
+    kill -INT "$pid" 2>/dev/null
+    rm -f "$PIDFILE" "$OUTFILE"
+
+    if [ -n "$output" ]; then
+      notify-send "Recording Stopped 🛑" "Saved to:\n$output"
+    else
+      notify-send "Recording Stopped 🛑" "Saved recording."
+    fi
+  elif pgrep -f "^gpu-screen-recorder( |$)" >/dev/null; then
+    pkill -INT -f "^gpu-screen-recorder( |$)"
+    notify-send "Recording Stopped 🛑" "Stopped active recording."
   else
-    pkill -x wf-recorder
     notify-send "Screen Recorder" "No active recording."
   fi
 }
