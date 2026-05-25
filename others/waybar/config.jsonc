@@ -109,7 +109,7 @@
   "custom/powerprofile": {
     "exec": "powerprofilesctl get",
     "interval": 5,
-    "format": "Power Mode: {}",
+    "format": "Mode: {}",
     "tooltip": false
   },
 

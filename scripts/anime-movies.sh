@@ -11,7 +11,7 @@ CHOICE=$(printf "Anime\nMovies" | wofi --dmenu --prompt "Watch" --lines 3 --widt
 LAUNCHER="$(dirname "$0")/launch-webapp.sh"
 
 case "$CHOICE" in
-Anime) "$LAUNCHER" "https://aniwatchtv.to" >/dev/null 2>&1 & ;;
+Anime) "$LAUNCHER" "https://anikai.to" >/dev/null 2>&1 & ;;
 Movies) "$LAUNCHER" "https://streamex.sh" >/dev/null 2>&1 & ;;
 *) exit 0 ;;
 esac
