@@ -14,7 +14,7 @@
   ],
 
   "modules-right": [
-    "custom/emp",
+    // "custom/emp",
     "cpu",
     "custom/gpu",
     "memory",
@@ -50,11 +50,11 @@
     }
   },
 
-   "clock": {
+  "clock": {
     "format": "{:%a %d %b %Y %H:%M}",
     "format-alt": "{:%Y-%m-%d}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "hyprctl dispatch exec \"[float; size 600 300; center] kitty --hold -e sigye\""
+    //"on-click": "hyprctl dispatch exec \"[float; size 600 300; center] kitty --hold -e sigye\""
   }, 
 
   "custom/emp": {
@@ -98,12 +98,18 @@
   },
 
   "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{icon} {capacity}%",
+      "format-charging": "󰂄 Plugged {capacity}%",
+      "format-plugged": "󰂄 Plugged {capacity}%",
+      "format-full": "󰁹 Full {capacity}%",
+      "format-icons": [
+         "󰁺","󰁻","󰁼","󰁽","󰁾",
+         "󰁿","󰂀","󰂁","󰂂","󰁹"
+      ]
   },
 
   "custom/powerprofile": {
@@ -115,11 +121,7 @@
 
   "tray": {
     "spacing": 8
-  },
-
-      "custom/screenrecord": {
-      "exec": "pgrep -x wf-recorder > /dev/null && echo '{\"text\":\"\",\"class\":\"recording\"}' || echo '{\"text\":\"\"}'",
-      "return-type": "json",
-      "interval": 1
   }
+
+
 }
