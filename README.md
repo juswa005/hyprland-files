@@ -145,7 +145,7 @@ This setup assumes a Wayland/Hyprland desktop with a fairly opinionated toolchai
 
 - `grim`, `slurp`, `hyprshot`, `gpu-screen-recorder`
 - `tesseract`, `magick`
-- `rsync`, `inotifywait`, `flock`, `lockfile`, `wtype`
+- `rsync`, `inotifywait`, `flock`, `wtype`
 
 ### Optional apps referenced by bindings or startup
 

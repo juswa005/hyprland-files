@@ -49,7 +49,6 @@ CORE_PKGS=(
     "imagemagick"
     "rsync"
     "inotify-tools"
-    "procmail"
     "wtype"
     "libnotify"
     "jre-openjdk"
@@ -74,7 +73,7 @@ AUR_PKGS=(
 for pkg in "${CORE_PKGS[@]}"; do
     if ! pacman -Qi "$pkg" &>/dev/null; then
         echo "Installing $pkg..."
-        sudo pacman -S --noconfirm --needed "$pkg"
+        sudo pacman -S --noconfirm --needed "$pkg" || echo "Warning: Failed to install $pkg from standard repos."
     else
         echo "$pkg is already installed."
     fi
