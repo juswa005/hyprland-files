@@ -1,0 +1,20 @@
+hl.exec_once("nm-applet")
+hl.exec_once("blueman-applet")
+hl.exec_once("waybar")
+-- hl.exec_once("hyprpaper")
+hl.exec_once("elephant")
+-- hl.exec_once("walker --gapplication-service")
+hl.exec_once("swaybg -i /home/amiel/.config/hypr/wallpapers/jap2.jpg -m fill")
+hl.exec_once("dunst")
+hl.exec_once("hyprsunset")
+-- hl.exec_once("cclipd -s 2 -t \"image/png\" -t \"image/*\" -t \"text/plain;charset=utf-8\" -t \"text/*\" -t \"*\"")
+hl.exec_once("wl-paste --type text --watch cliphist store")
+hl.exec_once("wl-paste --type image --watch cliphist store")
+
+-- Start Ollama
+hl.exec_once("systemctl --user start ollama || ollama serve")
+hl.exec_once("systemctl --user start hypridle.service")
+hl.exec_once("/home/amiel/.config/hypr/scripts/sync-others.sh watch")
+
+-- Start PicoClaw in background (optional)
+hl.exec_once("foot -e sh -c 'picoclaw agent 2>/dev/null'")
