@@ -42,6 +42,18 @@ CORE_PKGS=(
     "nautilus"
     "firefox"
     "code"
+    "grim"
+    "slurp"
+    "tesseract"
+    "tesseract-data-eng"
+    "imagemagick"
+    "rsync"
+    "inotify-tools"
+    "procmail"
+    "wtype"
+    "libnotify"
+    "jre-openjdk"
+    "power-profiles-daemon"
 )
 
 # Packages that might be in the AUR
@@ -55,6 +67,7 @@ AUR_PKGS=(
     "ollama"
     "elephant"
     "picoclaw-bin"
+    "gpu-screen-recorder-git"
 )
 
 # Install Core packages using pacman
