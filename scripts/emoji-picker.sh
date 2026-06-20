@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LOCK="/tmp/wofi-emoji.lock"
+LOCK="/tmp/walker-emoji.lock"
 DEBOUNCE=0.1
 
 exec 9>"$LOCK" || exit 0

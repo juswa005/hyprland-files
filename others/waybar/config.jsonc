@@ -25,7 +25,6 @@
   ],
 
 "hyprland/workspaces": {
-    "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
       "default": "",
@@ -54,30 +53,30 @@
     "format": "{:%a %d %b %Y %H:%M}",
     "format-alt": "{:%Y-%m-%d}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    //"on-click": "hyprctl dispatch exec \"[float; size 600 300; center] kitty --hold -e sigye\""
+    "on-click": "kitty --class waybar-sigye --hold -e sigye"
   }, 
 
   "custom/emp": {
     "exec": "hostname",
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty --hold -e fastfetch\""
+    "on-click": "kitty --class waybar-kitty --hold -e fastfetch"
   },
   "cpu": {
     "format": " {usage}%",
     "interval": 5,
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e btop\""
+    "on-click": "kitty --class waybar-kitty -e btop"
   },
 
   "custom/gpu": {
     "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits | awk -F ', ' '{printf \"󰢮 %s%% %s°C\", $1, $2}'",
     "interval": 5,
     "tooltip": false,
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e nvtop\""
+    "on-click": "kitty --class waybar-kitty -e nvtop"
   },
 
   "memory": {
     "format": " {percentage}%",
     "interval": 5,
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e btop\""
+    "on-click": "kitty --class waybar-kitty -e btop"
   },
 
   "network": {
@@ -85,7 +84,7 @@
     "format-ethernet": "󰈀  Wired",
     "format-disconnected": "󰤮  Offline",
     "tooltip-format": "{ifname} via {gwaddr}",
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e wifitui\""
+    "on-click": "kitty --class waybar-kitty -e wifitui"
   },
 
   "pulseaudio": {
@@ -94,7 +93,7 @@
     "format-icons": {
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "hyprctl dispatch exec \"[float; size 800 600; center] kitty -e pulsemixer\""
+    "on-click": "kitty --class waybar-kitty -e pulsemixer"
   },
 
   "battery": {

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LOCK="/tmp/wofi-google.lock"
+LOCK="/tmp/walker-google.lock"
 DEBOUNCE=0.1
 
 # Prevent multiple instances
@@ -8,8 +8,8 @@ exec 9>"$LOCK" || exit 0
 flock -n 9 || exit 0
 sleep "$DEBOUNCE"
 
-# Wofi dmenu mode with only a textbox
-QUERY=$(wofi --dmenu -p "Search Google" --lines 1)
+# Walker dmenu mode with only a textbox
+QUERY=$(wofi --dmenu -p "Search Google")
 
 # Exit if nothing typed
 [ -z "$QUERY" ] && rm -f "$LOCK" && exit 0

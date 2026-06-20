@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LOCK="/tmp/wofi-power.lock"
+LOCK="/tmp/walker-power.lock"
 DEBOUNCE=0.1
 
 exec 9>"$LOCK" || exit 0

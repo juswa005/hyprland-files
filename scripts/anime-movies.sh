@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-LOCK="/tmp/wofi-anime-movies.lock"
+LOCK="/tmp/walker-anime-movies.lock"
 DEBOUNCE=0.1
 
 exec 9>"$LOCK" || exit 0
 flock -n 9 || exit 0
 sleep "$DEBOUNCE"
 
-CHOICE=$(printf "Anime\nMovies" | wofi --dmenu --prompt "Watch" --lines 3 --width 220 --location center)
+CHOICE=$(printf "Anime\nMovies" | wofi --dmenu -p "Watch")
 LAUNCHER="$(dirname "$0")/launch-webapp.sh"
 
 case "$CHOICE" in

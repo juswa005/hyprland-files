@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LOCK="/tmp/wofi-tmux-cheatsheet.lock"
+LOCK="/tmp/walker-tmux-cheatsheet.lock"
 DEBOUNCE=0.1
 
 exec 9>"$LOCK" || exit 0
@@ -8,13 +8,9 @@ flock -n 9 || exit 0
 trap 'rm -f "$LOCK"' EXIT
 sleep "$DEBOUNCE"
 
-cat <<'EOF' | wofi \
-  --show dmenu \
-  --prompt "tmux" \
-  --width 800 \
-  --lines 18 \
-  --location center \
-  --cache-file /dev/null
+cat <<'EOF' | wofi --dmenu \
+  --dmenu \
+  --placeholder "tmux"
 Type to filter. Press Esc to close.
 prefix: Ctrl-b
 new or attach session: tmux new -As main
