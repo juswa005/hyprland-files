@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Open kitty to run the clipmgr.py interactive menu
-kitty --class clipmgr --title Clipboard -e python3 /home/amiel/.config/hypr/scripts/clipmgr.py menu
+# Use cliphist and wofi
+cliphist list | wofi -S dmenu -p "Clipboard" | cliphist decode | wl-copy

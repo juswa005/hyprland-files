@@ -23,6 +23,12 @@ start_recording() {
   if [ "$mode" = "audio" ]; then
     cmd+=( -a default_output -ac aac )
     audio_status="Audio: ON (desktop)"
+  elif [ "$mode" = "mic" ]; then
+    cmd+=( -a default_input -ac aac )
+    audio_status="Audio: ON (mic)"
+  elif [ "$mode" = "both" ]; then
+    cmd+=( -a default_output -a default_input -ac aac )
+    audio_status="Audio: ON (desktop + mic)"
   else
     audio_status="Audio: OFF"
   fi
@@ -63,6 +69,12 @@ stop_recording() {
 case "$1" in
 start-audio)
   start_recording audio
+  ;;
+start-mic)
+  start_recording mic
+  ;;
+start-both)
+  start_recording both
   ;;
 start-noaudio)
   start_recording

@@ -26,6 +26,10 @@ ascii_max_range = 7
 
 # read stdout from cava and output as JSON
 cava -p $config_file | while read -r line; do
-    output=$(echo "$line" | sed "$dict")
-    echo "{\"text\": \"$output\", \"tooltip\": \"Audio Visualizer\"}"
+    if [ -z "${line//[0;]/}" ]; then
+        echo "{\"text\": \"\", \"tooltip\": \"\"}"
+    else
+        output=$(echo "$line" | sed "$dict")
+        echo "{\"text\": \"$output\", \"tooltip\": \"Audio Visualizer\"}"
+    fi
 done

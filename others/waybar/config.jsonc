@@ -1,11 +1,12 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 36,
-  "spacing": 6,
+  "height": 34,
+  "spacing": 4,
 
   "modules-left": [
     "hyprland/workspaces",
+    "custom/cava",
     "custom/powerprofile"
   ],
 
@@ -15,17 +16,39 @@
 
   "modules-right": [
     // "custom/emp",
-    "cpu",
-    "custom/gpu",
-    "memory",
+    "group/hardware",
     "pulseaudio",
     "network",
+    "bluetooth",
     "battery",
     "tray"
   ],
 
+  "group/hardware": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "hardware-item",
+        "transition-left-to-right": false
+    },
+    "modules": [
+        "custom/expand",
+        "custom/gpu",
+        "memory",
+        "cpu"
+    ]
+  },
+
+  "custom/expand": {
+    "format": "",
+    "tooltip": false
+  },
+
 "hyprland/workspaces": {
     "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
     "format-icons": {
       "default": "",
       "1": "1",
@@ -41,19 +64,14 @@
       "active": "󱓻"
     },
     "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
+      "*": [1, 2, 3, 4, 5]
     }
   },
 
   "clock": {
     "format": "{:%a %d %b %Y %H:%M}",
     "format-alt": "{:%Y-%m-%d}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "kitty --class waybar-sigye --hold -e sigye"
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }, 
 
   "custom/emp": {
@@ -80,11 +98,21 @@
   },
 
   "network": {
-    "format-wifi": "  {essid}",
-    "format-ethernet": "󰈀  Wired",
-    "format-disconnected": "󰤮  Offline",
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤮",
     "tooltip-format": "{ifname} via {gwaddr}",
     "on-click": "kitty --class waybar-kitty -e wifitui"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "overskride"
   },
 
   "pulseaudio": {
@@ -112,9 +140,17 @@
   },
 
   "custom/powerprofile": {
-    "exec": "powerprofilesctl get",
-    "interval": 5,
-    "format": "Mode: {}",
+    "exec": "mode=$(powerprofilesctl get); if [ \"$mode\" = \"performance\" ]; then echo '{\"text\":\"\", \"tooltip\":\"Performance Mode\"}'; elif [ \"$mode\" = \"power-saver\" ]; then echo '{\"text\":\"󰌪\", \"tooltip\":\"Power Saver Mode\"}'; else echo '{\"text\":\"󰾆\", \"tooltip\":\"Balanced Mode\"}'; fi",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "on-click": "mode=$(powerprofilesctl get); if [ \"$mode\" = \"performance\" ]; then powerprofilesctl set power-saver; elif [ \"$mode\" = \"power-saver\" ]; then powerprofilesctl set balanced; else powerprofilesctl set performance; fi"
+  },
+
+  "custom/cava": {
+    "exec": "/home/amiel/.config/waybar/scripts/cava.sh",
+    "return-type": "json",
+    "format": "{}",
     "tooltip": false
   },
 

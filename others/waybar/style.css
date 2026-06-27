@@ -40,7 +40,9 @@ window#waybar {
 #custom-gpu,
 #custom-emp,
 #memory,
+#custom-expand,
 #network,
+#bluetooth,
 #pulseaudio,
 #battery {
     padding: 0 10px;
@@ -53,7 +55,9 @@ window#waybar {
 #custom-gpu:hover,
 #custom-emp:hover,
 #memory:hover,
+#custom-expand:hover,
 #network:hover,
+#bluetooth:hover,
 #pulseaudio:hover {
     background: rgba(255, 255, 255, 0.05);
 }
@@ -75,7 +79,8 @@ window#waybar {
     font-weight: bold;
 }
 
-#custom-powerprofile {
+#custom-powerprofile,
+#custom-cava {
     padding: 0 10px;
     color: #ffffff;
 }

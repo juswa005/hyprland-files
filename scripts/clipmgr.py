@@ -6,7 +6,6 @@ import json
 import subprocess
 
 HISTORY_FILE = os.path.expanduser("~/.clipmgr_history.json")
-MAX_ITEMS = 100
 
 def load_history():
     if os.path.exists(HISTORY_FILE):
@@ -37,10 +36,6 @@ def add_item():
     history = [item for item in history if item != content]
 
     history.insert(0, content)
-
-    if len(history) > MAX_ITEMS:
-        history = history[:MAX_ITEMS]
-
     save_history(history)
 
 def start_daemon():

@@ -3,7 +3,6 @@ local webapp = "/home/amiel/.config/hypr/scripts/launch-webapp.sh"
 local powermenu = "/home/amiel/.config/hypr/scripts/powermenu.sh"
 local applauncher = "/home/amiel/.config/hypr/scripts/applauncher.sh"
 local websearch = "/home/amiel/.config/hypr/scripts/search.sh"
-local openbinds = "/home/amiel/.config/hypr/scripts/hypr-binds.sh"
 local minecraft = "/home/amiel/.config/hypr/scripts/tlauncher-launcher.sh"
 local clipboard = "/home/amiel/.config/hypr/scripts/clipboard.sh"
 local screenrecord = "/home/amiel/.config/hypr/scripts/screenrecord.sh"
@@ -12,7 +11,6 @@ local spotify_notify = "/home/amiel/.config/hypr/scripts/notify-spotify.sh"
 local wb_toggle = "/home/amiel/.config/hypr/scripts/waybar-toggle.sh"
 local quicknote = "/home/amiel/.config/hypr/scripts/quick-note.sh"
 local powermode = "/home/amiel/.config/hypr/scripts/powermode.sh"
-local watch = "/home/amiel/.config/hypr/scripts/anime-movies.sh"
 local hypridle_toggle = "/home/amiel/.config/hypr/scripts/hypridle-toggle.sh"
 local kb_toggle = "/home/amiel/.config/hypr/scripts/keyboard-mode-toggle.sh"
 local tmux_cheatsheet = "/home/amiel/.config/hypr/scripts/tmux-cheatsheet.sh"
@@ -20,35 +18,36 @@ local nvim_cheatsheet = "/home/amiel/.config/hypr/scripts/nvim-cheatsheet.sh"
 
 -- Apps
 hl.bind("SUPER + RETURN", hl.dsp.exec_cmd("kitty"))
-hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class FastfetchTerminal zsh -c \"fastfetch; exec zsh\""))
+hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd('kitty --class FastfetchTerminal zsh -c "fastfetch; exec zsh"'))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(applauncher))
 hl.bind("SUPER + W", hl.dsp.window.close())
 hl.bind("SUPER + B", hl.dsp.exec_cmd("helium-browser --profile-directory=Default"))
-hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd("helium-browser --profile-directory=\"School\""))
+hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd('helium-browser --profile-directory="School"'))
 hl.bind("SUPER + E", hl.dsp.exec_cmd("nautilus --new-window"))
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("hypremoji"))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(minecraft))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("localsend"))
 hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd("spotify"))
 hl.bind("SUPER + grave", hl.dsp.exec_cmd("code"))
+hl.bind("SUPER + N", hl.dsp.exec_cmd("kitty --class NvimTerminal nvim"))
+
 -- Note: removed snap visualboyadvance-m as per user instruction
 -- hl.bind("CONTROL SHIFT", "G", "exec", "[float; size 800 600; center] /snap/bin/visualboyadvance-m")
 
 -- WebApps
-hl.bind("SUPER + I", hl.dsp.exec_cmd(webapp .. " \"https://www.instagram.com/\""))
-hl.bind("SUPER + C", hl.dsp.exec_cmd(webapp .. " \"https://calendar.google.com/\""))
-hl.bind("SUPER + SHIFT + F", hl.dsp.exec_cmd(webapp .. " \"https://www.facebook.com/\""))
-hl.bind("SUPER + A", hl.dsp.exec_cmd(webapp .. " \"https://chatgpt.com\""))
-hl.bind("SUPER + G", hl.dsp.exec_cmd(webapp .. " \"https://mail.google.com\""))
-hl.bind("SUPER + Y", hl.dsp.exec_cmd(webapp .. " \"https://youtube.com/\""))
-hl.bind("SUPER + M", hl.dsp.exec_cmd(webapp .. " \"https://facebook.com/messages/\""))
-hl.bind("SUPER + N", hl.dsp.exec_cmd(watch))
-hl.bind("SUPER + SHIFT + G", hl.dsp.exec_cmd(webapp .. " \"https://github.com/juswa005\""))
-hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd(webapp .. " \"https://gemini.google.com/app\""))
-hl.bind("SUPER + D", hl.dsp.exec_cmd("firefox \"https://discord.com/channels/@me\""))
-hl.bind("SUPER + SHIFT + O", hl.dsp.exec_cmd(webapp .. " \"https://github.com/BitSync-Devs\""))
-hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(webapp .. " \"http://192.168.254.254\""))
-hl.bind("SUPER + U", hl.dsp.exec_cmd(webapp .. " \"http://100.108.14.11:3001/dashboard\""))
+hl.bind("SUPER + I", hl.dsp.exec_cmd(webapp .. ' "https://www.instagram.com/"'))
+hl.bind("SUPER + C", hl.dsp.exec_cmd(webapp .. ' "https://calendar.google.com/"'))
+hl.bind("SUPER + SHIFT + F", hl.dsp.exec_cmd(webapp .. ' "https://www.facebook.com/"'))
+hl.bind("SUPER + A", hl.dsp.exec_cmd(webapp .. ' "https://chatgpt.com"'))
+hl.bind("SUPER + G", hl.dsp.exec_cmd(webapp .. ' "https://mail.google.com"'))
+hl.bind("SUPER + Y", hl.dsp.exec_cmd(webapp .. ' "https://youtube.com/"'))
+hl.bind("SUPER + M", hl.dsp.exec_cmd(webapp .. ' "https://facebook.com/messages/"'))
+hl.bind("SUPER + SHIFT + G", hl.dsp.exec_cmd(webapp .. ' "https://github.com/juswa005"'))
+hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd(webapp .. ' "https://gemini.google.com/app"'))
+hl.bind("SUPER + D", hl.dsp.exec_cmd('firefox "https://discord.com/channels/@me"'))
+hl.bind("SUPER + SHIFT + O", hl.dsp.exec_cmd(webapp .. ' "https://github.com/BitSync-Devs"'))
+hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(webapp .. ' "http://192.168.254.254"'))
+hl.bind("SUPER + U", hl.dsp.exec_cmd(webapp .. ' "http://100.108.14.11:3001/dashboard"'))
 
 -- Hyprland
 hl.bind("SUPER + SHIFT + CONTROL + Q", hl.dsp.exit())
@@ -70,13 +69,13 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Switch Workspaces
 for i = 1, 9 do
-    hl.bind("SUPER + " .. i, hl.dsp.focus({ workspace = i }))
+	hl.bind("SUPER + " .. i, hl.dsp.focus({ workspace = i }))
 end
 hl.bind("SUPER + 0", hl.dsp.focus({ workspace = 10 }))
 
 -- Move windows
 for i = 1, 9 do
-    hl.bind("SUPER + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
+	hl.bind("SUPER + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 hl.bind("SUPER + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
@@ -118,13 +117,14 @@ hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ direction = "prev" }))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region --output-folder ~/Pictures/Screenshots"))
 hl.bind("SUPER + ALT + S", hl.dsp.exec_cmd(screenrecord .. " start-audio"))
 hl.bind("SUPER + CTRL + S", hl.dsp.exec_cmd(screenrecord .. " start-noaudio"))
+hl.bind("SUPER + ALT + M", hl.dsp.exec_cmd(screenrecord .. " start-mic"))
+hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(screenrecord .. " start-both"))
 hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd(screenrecord .. " stop"))
 
 -- Websearc
 hl.bind("SUPER + ALT + SPACE", hl.dsp.exec_cmd(websearch))
 
 -- Keybinds viewer & Cheatsheets
-hl.bind("SUPER + K", hl.dsp.exec_cmd(openbinds))
 hl.bind("SUPER + H", hl.dsp.exec_cmd(tmux_cheatsheet))
 hl.bind("SUPER + SHIFT + H", hl.dsp.exec_cmd(nvim_cheatsheet))
 
