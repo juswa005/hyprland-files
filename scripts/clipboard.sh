@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env fish
+# Clipboard manager script using cliphist and wofi
 
-# Use cliphist and wofi
-cliphist list | wofi -S dmenu -p "Clipboard" | cliphist decode | wl-copy
+if pkill wofi
+    exit 0
+end
+
+cliphist list | wofi --dmenu --prompt "Clipboard" | cliphist decode | wl-copy

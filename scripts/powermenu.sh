@@ -1,16 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-LOCK="/tmp/walker-power.lock"
-DEBOUNCE=0.1
+if pkill wofi
+    exit 0
+end
 
-exec 9>"$LOCK" || exit 0
-flock -n 9 || exit 0
-sleep "$DEBOUNCE"
+set CHOICE (printf "Shutdown\nReboot" | wofi --dmenu --prompt "Power Options" --lines 3 --width 200 --location center)
 
-CHOICE=$(printf "Shutdown\nReboot" | wofi --dmenu --prompt "Power Options" --lines 3 --width 200 --location center)
-
-case "$CHOICE" in
-Shutdown) systemctl poweroff ;;
-Reboot) systemctl reboot ;;
-*) ;;
-esac
+switch "$CHOICE"
+    case Shutdown
+        systemctl poweroff
+    case Reboot
+        systemctl reboot
+end

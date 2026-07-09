@@ -1,13 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env fish
 
-# Launch a website in helium-browser webapp mode
-URL="$1"
+# Launch a website in chromium webapp mode
+set URL $argv[1]
 
-if [ -z "$URL" ]; then
+if test -z "$URL"
   echo "Usage: launch-webapp <URL>"
   exit 1
-fi
+end
 
-helium-browser --app="$URL" &
-#brave --app="$URL" &
-#vivaldi --app="$URL" &
+chromium --app="$URL" &
