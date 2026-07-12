@@ -8,4 +8,4 @@ if test -z "$URL"
   exit 1
 end
 
-chromium --app="$URL" &
+helium --app="$URL" &
