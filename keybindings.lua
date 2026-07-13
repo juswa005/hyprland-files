@@ -85,6 +85,9 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region --output-
 hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output --output-folder ~/Pictures/Screenshots"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m window --output-folder ~/Pictures/Screenshots"))
 
+-- Dark mode and light mode toggle
+hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("/home/amiel/.config/hypr/scripts/toggle-theme.sh"))
+
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
